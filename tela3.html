@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela 3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="div-tela">
+            <a href="./tela1.html" class="tela">Ir para a Tela 1</a>
+        </div>
+        <div class="div-tela">
+            <a href="./tela2.html" class="tela">Ir para a Tela 2</a>
+        </div>
+        <h1>Resultado da Busca</h1>
+        <div id="resultadoBusca"></div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const resultadoBusca = document.getElementById('resultadoBusca');
+            const mensagemBusca = localStorage.getItem('mensagemBusca');
+
+            if (mensagemBusca) {
+                resultadoBusca.textContent = mensagemBusca;
+                localStorage.removeItem('mensagemBusca');
+            } else {
+                resultadoBusca.textContent = 'Nenhuma mensagem disponível.';
+            }
+        }
+    </script>
+</body>
+</html>

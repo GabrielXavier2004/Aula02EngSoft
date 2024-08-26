@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela 2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Busca de Número</h1>
+        <form id="formBusca">
+            <div class="form-group">
+                <label for="chaveBusca">Número para Buscar:</label>
+                <input type="text" id="chaveBusca" name="chaveBusca">
+            </div>
+            <button type="button" onclick="buscarNumero()">Entra</button>
+        </form>
+    </div>
+
+    <script>
+        function buscarNumero() {
+            const chaveBusca = document.getElementById('chaveBusca').value;
+            const numero = parseInt(chaveBusca, 10);
+
+            let mensagemBusca;
+
+            if (isNaN(numero)) {
+                mensagemBusca = 'Por favor, insira um número inteiro válido.';
+            } else {
+                const numerosOrdenados = JSON.parse(localStorage.getItem('numerosOrdenados'));
+
+                if (!numerosOrdenados) {
+                    mensagemBusca = 'Nenhum número ordenado encontrado. Por favor, insira números na Tela 1.';
+                } else {
+                    const index = buscaBinaria(numerosOrdenados, numero);
+                    mensagemBusca = index !== -1
+                        ? `Número ${numero} encontrado na posição ${index + 1}.`
+                        : `Número ${numero} não encontrado.`;
+                }
+            }
+
+            localStorage.setItem('mensagemBusca', mensagemBusca);
+            window.location.href = './tela3.html';
+        }
+
+        function buscaBinaria(array, valor) {
+            let baixo = 0;
+            let alto = array.length - 1;
+
+            while (baixo <= alto) {
+                const meio = Math.floor((baixo + alto) / 2);
+                if (array[meio] === valor) {
+                    return meio;
+                }
+                if (array[meio] < valor) {
+                    baixo = meio + 1;
+                } else {
+                    alto = meio - 1;
+                }
+            }
+
+            return -1;
+        }
+    </script>
+</body>
+</html>

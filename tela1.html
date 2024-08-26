@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Digite 8 números inteiros</h1>
+        <form id="formEntrada">
+            <div class="form-group">
+                <label for="num1">Número 1:</label>
+                <input type="text" id="num1" name="num1">
+            </div>
+            <div class="form-group">
+                <label for="num2">Número 2:</label>
+                <input type="text" id="num2" name="num2">
+            </div>
+            <div class="form-group">
+                <label for="num3">Número 3:</label>
+                <input type="text" id="num3" name="num3">
+            </div>
+            <div class="form-group">
+                <label for="num4">Número 4:</label>
+                <input type="text" id="num4" name="num4">
+            </div>
+            <div class="form-group">
+                <label for="num5">Número 5:</label>
+                <input type="text" id="num5" name="num5">
+            </div>
+            <div class="form-group">
+                <label for="num6">Número 6:</label>
+                <input type="text" id="num6" name="num6">
+            </div>
+            <div class="form-group">
+                <label for="num7">Número 7:</label>
+                <input type="text" id="num7" name="num7">
+            </div>
+            <div class="form-group">
+                <label for="num8">Número 8:</label>
+                <input type="text" id="num8" name="num8">
+            </div>
+            <button type="button" onclick="processarEntradas()">Entra</button>
+        </form>
+    </div>
+
+    <script>
+        function processarEntradas() {
+            const numeros = [];
+            let valido = true;
+
+            for (let i = 1; i <= 8; i++) {
+                const valor = document.getElementById('num' + i).value;
+                const numero = parseInt(valor, 10);
+
+                if (isNaN(numero)) {
+                    valido = false;
+                    break;
+                }
+
+                numeros.push(numero);
+            }
+
+            if (valido) {
+                numeros.sort((a, b) => a - b);
+                localStorage.setItem('numerosOrdenados', JSON.stringify(numeros));
+                
+                window.location.href = './tela2.html';
+            } else {
+                alert('Por favor, insira apenas números inteiros válidos.');
+            }
+        }
+    </script>
+</body>
+</html>
